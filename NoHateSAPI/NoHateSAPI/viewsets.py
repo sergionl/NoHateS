@@ -13,6 +13,7 @@ from .modelStruct.tokenizer import Tokenizer
 import torch
 import torch.nn as nn
 from tqdm import tqdm
+import numpy as np
 
 
 class InfoViewset(viewsets.ModelViewSet):
@@ -55,9 +56,10 @@ class InfoViewset(viewsets.ModelViewSet):
               b_labels = batch[2]#.to(device)
 
               predictions = model(b_input_ids,b_input_mask)
+              pred = np.argmax(predictions,axis=1).flatten()
 
-        print(predictions)
-        return Response("c:")
+        print(pred)
+        return Response(pred)
 
 
         
